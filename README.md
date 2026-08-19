@@ -44,3 +44,9 @@ SRTF is selected because it achieved the lowest measured average
 waiting time of 11.500 ticks for this workload while preserving
 the preemptive behavior needed to react to shorter jobs as they
 arrive.
+
+## Part 2 — Cloud, Security & IoT Deployment Blueprint
+
+The complete Tasks 9–14 deployment blueprint is available here:
+
+[Architecture Blueprint](docs/architecture_blueprint.md)
