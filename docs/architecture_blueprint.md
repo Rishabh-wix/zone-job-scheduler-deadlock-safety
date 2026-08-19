@@ -665,3 +665,125 @@ This layered design separates device collection, communication,
 cloud processing, and user-facing applications while allowing the
 Part 1 scheduling and safety components to operate in the Cloud
 Platform layer.  
+
+# Task 14 — IoT Security Threats and Mitigation
+
+IoT devices are exposed to physical, network, and application-level
+security threats. The following threats are considered important
+for the Smart City environment.
+
+## 1. Unauthorized IoT Device Access
+
+### Threat
+
+An attacker may attempt to gain unauthorized access to a traffic
+camera, environmental sensor, or public-safety wearable.
+
+A compromised device could be used to access Smart City data or
+send malicious information to the cloud platform.
+
+### Mitigation
+
+Use device identity, authentication, device certificates, and
+mutual TLS (mTLS) for trusted device-to-cloud communication.
+
+Devices should also use unique credentials and should not share
+default passwords.
+
+### Security Benefit
+
+Only authenticated and trusted devices can communicate with
+authorized Smart City services.
+
+---
+
+## 2. Data Interception
+
+### Threat
+
+An attacker could attempt to intercept sensor data or public-safety
+alerts while they are travelling between an IoT device, gateway,
+and cloud service.
+
+### Mitigation
+
+Use HTTPS/TLS for cloud communication and encrypted communication
+channels wherever supported by the IoT communication technology.
+
+Sensitive data should also be encrypted at rest.
+
+### Security Benefit
+
+Encryption reduces the risk of attackers reading or modifying
+sensitive information during transmission.
+
+---
+
+## 3. DDoS and Excessive Traffic
+
+### Threat
+
+Attackers may send a large number of requests to Smart City APIs
+or cloud services, causing excessive resource consumption and
+potential service disruption.
+
+### Mitigation
+
+Use AWS WAF, request-rate limiting, traffic filtering, load
+balancing, and Auto Scaling.
+
+Network-level controls should also restrict unnecessary traffic
+from reaching internal resources.
+
+### Security Benefit
+
+These controls reduce malicious traffic, protect APIs, and help
+maintain availability during traffic spikes or attacks.
+
+---
+
+## 4. Compromised IoT Device
+
+### Threat
+
+If an IoT device is compromised, an attacker may attempt to use it
+as an entry point into the Smart City network.
+
+A compromised device could also send false sensor information.
+
+### Mitigation
+
+Use network segmentation, least-privilege permissions, device
+authentication, secure firmware updates, and device isolation.
+
+Zone-A, Zone-B, and Zone-C resources should remain isolated using
+the VPC subnet and Security Group design.
+
+### Security Benefit
+
+A compromised device can be isolated so that the attacker cannot
+easily move to other Smart City resources or zones.
+
+---
+
+## IoT Threat and Mitigation Summary
+
+| Threat | Mitigation | Main Security Goal |
+|--------|------------|--------------------|
+| Unauthorized device access | Device certificates + mTLS + unique credentials | Authentication |
+| Data interception | HTTPS/TLS + encryption | Confidentiality |
+| DDoS / excessive traffic | AWS WAF + rate limiting + load balancing | Availability |
+| Compromised IoT device | Segmentation + isolation + least privilege | Containment |
+
+## Overall IoT Security Strategy
+
+The Smart City IoT environment will use defense-in-depth.
+
+Device authentication protects the device layer, encrypted
+communication protects data in transit, network segmentation
+limits lateral movement, least-privilege IAM controls access, and
+AWS WAF and rate limiting help protect cloud-facing services.
+
+Together, these controls reduce the likelihood and impact of
+successful IoT attacks while supporting the availability and
+security requirements of the Smart City platform.
