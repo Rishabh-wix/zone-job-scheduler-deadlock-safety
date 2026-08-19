@@ -466,3 +466,202 @@ service identities.
 | Data at Rest | Stored jobs and sensor logs | Encryption at rest + AWS KMS |
 | Data in Transit | Public-safety alert | HTTPS + TLS |
 | Data in Use | Banker's Algorithm processing | Process/container isolation + least privilege |
+
+
+# Task 13 — IoT Device and Communication Design
+
+## IoT Devices
+
+The Smart City system will use different IoT devices depending on
+the data volume, communication range, power requirements, and
+real-time needs of each device.
+
+### 1. Traffic Camera
+
+#### Purpose
+
+Traffic cameras monitor roads, intersections, traffic density,
+and public-safety events.
+
+#### Communication Technology
+
+5G.
+
+#### Why 5G?
+
+Traffic cameras can generate high-bandwidth video data and may
+require low-latency communication. 5G provides high bandwidth and
+low latency, making it suitable for real-time video and traffic
+monitoring.
+
+---
+
+### 2. Environmental Sensor
+
+#### Purpose
+
+Environmental sensors monitor parameters such as temperature,
+air quality, humidity, and other environmental conditions.
+
+#### Communication Technology
+
+LoRaWAN.
+
+#### Why LoRaWAN?
+
+Environmental sensors typically transmit small amounts of data
+and may operate on battery power. LoRaWAN provides long-range,
+low-power communication and is therefore suitable for distributed
+environmental sensors.
+
+---
+
+### 3. Public-Safety Wearable
+
+#### Purpose
+
+Public-safety wearables can provide location, status, and
+emergency information for personnel working in the city.
+
+#### Communication Technology
+
+Bluetooth Low Energy (BLE).
+
+#### Why BLE?
+
+BLE is suitable for short-range communication and consumes
+relatively little power, making it appropriate for wearable
+devices that need to conserve battery life.
+
+---
+
+## IoT Architecture — Six Layers
+
+The Smart City IoT architecture will contain six layers:
+
+1. Physical Environment
+2. Perception / Device
+3. Gateway
+4. Network Communication
+5. Cloud Platform
+6. Application
+
+### Layer 1 — Physical Environment
+
+This layer represents the real-world Smart City environment.
+
+Examples include:
+
+- Roads
+- Traffic intersections
+- Public areas
+- Environmental conditions
+- Public-safety personnel
+
+---
+
+### Layer 2 — Perception / Device Layer
+
+This layer contains the IoT devices that collect information from
+the physical environment.
+
+Examples include:
+
+- Traffic cameras
+- Environmental sensors
+- Public-safety wearables
+
+These devices capture sensor readings, images, status information,
+and other observations.
+
+---
+
+### Layer 3 — Gateway Layer
+
+The gateway layer collects data from local IoT devices and provides
+a bridge between devices and the cloud/network infrastructure.
+
+The gateway can perform:
+
+- Device aggregation
+- Basic filtering
+- Protocol translation
+- Local buffering
+- Initial security checks
+
+---
+
+### Layer 4 — Network Communication Layer
+
+This layer transports information between IoT devices, gateways,
+and cloud services.
+
+The system can use:
+
+- 5G for high-bandwidth traffic-camera communication
+- LoRaWAN for long-range, low-power environmental sensors
+- BLE for short-range wearable communication
+- HTTPS/TLS for secure cloud API communication
+
+---
+
+### Layer 5 — Cloud Platform Layer
+
+The Cloud Platform receives, stores, processes, and manages data
+from the Smart City zones.
+
+This layer also hosts the Part 1 Zone Job Scheduler and safety
+components.
+
+The cloud platform includes:
+
+- SRTF-based Zone Job Scheduler
+- Banker's Algorithm safety engine
+- Synchronization components
+- Sensor data processing
+- Cloud storage
+- Security and monitoring services
+
+The Part 1 scheduling and deadlock-safety logic therefore becomes
+part of the cloud processing layer of the Smart City architecture.
+
+---
+
+### Layer 6 — Application Layer
+
+The Application layer provides services to users and city
+administrators.
+
+Examples include:
+
+- Smart City Dashboard
+- Public-safety alert dashboard
+- Traffic monitoring
+- Environmental monitoring
+- Zone scheduling status
+- System health monitoring
+
+---
+
+## Six-Layer Data Flow
+
+The overall IoT data flow is:
+
+Physical Environment
+        ↓
+Perception / Device Layer
+        ↓
+Gateway Layer
+        ↓
+Network Communication Layer
+        ↓
+Cloud Platform Layer
+        ↓
+Application Layer
+        ↓
+Smart City Dashboard
+
+This layered design separates device collection, communication,
+cloud processing, and user-facing applications while allowing the
+Part 1 scheduling and safety components to operate in the Cloud
+Platform layer.  
