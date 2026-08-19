@@ -97,6 +97,12 @@ uploaded in batches during background processing.
 This reduces unnecessary network traffic and avoids blocking the
 zone controller while large log files are uploaded.
 
+## Summary
+
+| Flow | Communication | Protocol | Reason |
+|------|---------------|----------|--------|
+| Public-safety alert | Synchronous | HTTPS/TLS | Immediate request and acknowledgement |
+| Full-day sensor log | Asynchronous | HTTPS/TLS | Batch/background transfer |
 
 # Task 10 — VPC and Network Security Design
 
@@ -172,9 +178,3 @@ cloud services, reduced attack surface, and centralized security
 management while allowing all three zones to operate as part of
 the same Smart City system.
 
-## Summary
-
-| Flow | Communication | Protocol | Reason |
-|------|---------------|----------|--------|
-| Public-safety alert | Synchronous | HTTPS/TLS | Immediate request and acknowledgement |
-| Full-day sensor log | Asynchronous | HTTPS/TLS | Batch/background transfer |
