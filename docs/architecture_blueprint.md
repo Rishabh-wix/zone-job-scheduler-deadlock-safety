@@ -97,6 +97,81 @@ uploaded in batches during background processing.
 This reduces unnecessary network traffic and avoids blocking the
 zone controller while large log files are uploaded.
 
+
+# Task 10 — VPC and Network Security Design
+
+## VPC Design
+
+The Smart City cloud environment will use one VPC with separate
+private subnets for the three zones.
+
+### VPC CIDR
+
+10.0.0.0/16
+
+### Subnet Design
+
+| Zone | Subnet | CIDR | Purpose |
+|------|--------|------|---------|
+| Zone-A | Private Subnet A | 10.0.1.0/24 | Zone-A controller resources |
+| Zone-B | Private Subnet B | 10.0.2.0/24 | Zone-B controller resources |
+| Zone-C | Private Subnet C | 10.0.3.0/24 | Zone-C controller resources |
+
+## Why One VPC?
+
+A single VPC provides centralized network management while the
+three private subnets provide logical isolation between Zone-A,
+Zone-B, and Zone-C.
+
+This design makes it easier to apply common routing, security,
+monitoring, and access-control policies.
+
+The zones do not need separate VPCs because they are part of the
+same Smart City cloud environment and need controlled access to
+shared cloud services.
+
+## Network-Level Security Control
+
+The primary network-level security control will be Security Group
+rules.
+
+Security Groups will follow a least-privilege approach.
+
+### Example Rules
+
+1. Zone-A resources can communicate only with approved cloud API
+   endpoints and required services.
+
+2. Zone-B resources can communicate only with approved cloud API
+   endpoints and required services.
+
+3. Zone-C resources can communicate only with approved cloud API
+   endpoints and required services.
+
+4. Direct communication between Zone-A, Zone-B, and Zone-C
+   controller resources will be denied unless explicitly required.
+
+5. Only required inbound and outbound ports will be allowed.
+
+6. Public access to the zone-controller resources will not be
+   allowed directly.
+
+## Network Flow
+
+Zone-A Private Subnet ─┐
+Zone-B Private Subnet ─┼──> Controlled Cloud Services
+Zone-C Private Subnet ─┘
+
+All traffic between zone resources and cloud services is controlled
+using routing rules, Security Groups, and encrypted communication.
+
+## Security Goal
+
+The VPC design provides network isolation, controlled access to
+cloud services, reduced attack surface, and centralized security
+management while allowing all three zones to operate as part of
+the same Smart City system.
+
 ## Summary
 
 | Flow | Communication | Protocol | Reason |
