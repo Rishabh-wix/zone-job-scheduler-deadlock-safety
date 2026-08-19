@@ -173,6 +173,141 @@ using routing rules, Security Groups, and encrypted communication.
 
 ## Security Goal
 
+
+
+# Task 11 — Security Objectives and Controls
+
+The Smart City system must protect its infrastructure, users,
+sensor data, and cloud services. The following six security
+objectives are selected for the system.
+
+## 1. Protect Sensitive Data
+
+### Objective
+
+Protect sensitive Smart City data from unauthorized access,
+modification, or disclosure.
+
+### Security Control
+
+Encryption at rest using AWS Key Management Service (AWS KMS).
+
+### Explanation
+
+Sensitive sensor records, job information, logs, and other stored
+data should be encrypted. Encryption keys should be managed
+securely using AWS KMS with appropriate access permissions.
+
+---
+
+## 2. Strong Authentication
+
+### Objective
+
+Ensure that only authenticated users and devices can access
+Smart City services.
+
+### Security Control
+
+Identity and Access Management (IAM) with strong authentication.
+
+### Explanation
+
+Users, administrators, and cloud services should use managed
+identities. Strong authentication reduces the risk of unauthorized
+account access.
+
+---
+
+## 3. Authorization and Least Privilege
+
+### Objective
+
+Ensure that authenticated users and services can access only the
+resources required for their responsibilities.
+
+### Security Control
+
+Role-Based Access Control (RBAC) using IAM policies.
+
+### Explanation
+
+Permissions should be assigned according to job responsibilities.
+For example, a zone operator should not receive administrative
+permissions unless they are required. This follows the principle
+of least privilege.
+
+---
+
+## 4. Protection Against Web and Network Attacks
+
+### Objective
+
+Protect public-facing cloud applications and APIs from common
+malicious traffic and attacks.
+
+### Security Control
+
+AWS WAF and request-rate limiting.
+
+### Explanation
+
+AWS WAF can inspect incoming web requests and block malicious
+traffic. Rate limiting can reduce abuse and help protect APIs from
+excessive requests.
+
+---
+
+## 5. Secure Communication
+
+### Objective
+
+Protect information while it is transmitted between zone
+controllers, cloud services, and the Smart City Dashboard.
+
+### Security Control
+
+HTTPS with TLS encryption.
+
+### Explanation
+
+All sensitive communication should use encrypted HTTPS/TLS
+connections. This helps prevent attackers from reading or
+modifying data while it is in transit.
+
+---
+
+## 6. High Availability
+
+### Objective
+
+Keep Smart City services available even when individual
+infrastructure components fail.
+
+### Security Control
+
+Load balancing, Auto Scaling, and multi-AZ deployment.
+
+### Explanation
+
+Critical cloud services can be deployed across multiple
+Availability Zones. Load balancing distributes traffic, while
+Auto Scaling can add or remove resources according to demand.
+This improves availability and resilience.
+
+---
+
+## Security Objectives Summary
+
+| Security Objective | Control | Purpose |
+|---------------------|---------|---------|
+| Protect sensitive data | AWS KMS / encryption at rest | Protect stored data |
+| Strong authentication | IAM / strong authentication | Verify identities |
+| Authorization | RBAC / least privilege | Limit resource access |
+| Attack protection | AWS WAF / rate limiting | Block malicious traffic |
+| Secure communication | HTTPS / TLS | Protect data in transit |
+| High availability | Load Balancer / Auto Scaling / Multi-AZ | Maintain service availability |
+
 The VPC design provides network isolation, controlled access to
 cloud services, reduced attack surface, and centralized security
 management while allowing all three zones to operate as part of
