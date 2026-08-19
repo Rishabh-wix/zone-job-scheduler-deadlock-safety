@@ -172,8 +172,10 @@ All traffic between zone resources and cloud services is controlled
 using routing rules, Security Groups, and encrypted communication.
 
 ## Security Goal
-
-
+The VPC design provides network isolation, controlled access to
+cloud services, reduced attack surface, and centralized security
+management while allowing all three zones to operate as part of
+the same Smart City system.
 
 # Task 11 — Security Objectives and Controls
 
@@ -308,8 +310,5 @@ This improves availability and resilience.
 | Secure communication | HTTPS / TLS | Protect data in transit |
 | High availability | Load Balancer / Auto Scaling / Multi-AZ | Maintain service availability |
 
-The VPC design provides network isolation, controlled access to
-cloud services, reduced attack surface, and centralized security
-management while allowing all three zones to operate as part of
-the same Smart City system.
+
 
