@@ -311,4 +311,158 @@ This improves availability and resilience.
 | High availability | Load Balancer / Auto Scaling / Multi-AZ | Maintain service availability |
 
 
+# Task 12 — IAM Roles and Data Protection
 
+## IAM Role Design
+
+The Smart City system will use role-based access control and
+least-privilege permissions. Each role receives only the
+permissions required for its responsibilities.
+
+### Role 1 — Zone Operator
+
+#### Responsibilities
+
+The Zone Operator manages and monitors the assigned zone.
+
+#### Permissions
+
+- Read sensor and job status data for the assigned zone.
+- Submit approved jobs to the scheduling system.
+- View scheduling results for the assigned zone.
+- View relevant operational logs.
+
+#### Restrictions
+
+The Zone Operator cannot modify IAM policies, create
+administrative users, or access resources belonging to other
+zones unless explicitly authorized.
+
+
+### Role 2 — City Dashboard Administrator
+
+#### Responsibilities
+
+The City Dashboard Administrator manages the Smart City
+dashboard and monitors city-wide operational information.
+
+#### Permissions
+
+- View data from all three zones.
+- View public-safety alerts.
+- Manage dashboard configurations.
+- View system health and operational logs.
+
+#### Restrictions
+
+The Dashboard Administrator cannot modify core IAM security
+policies unless the permission is explicitly required for the
+administrator's responsibilities.
+
+
+### Role 3 — Security Administrator
+
+#### Responsibilities
+
+The Security Administrator manages security-related configuration
+and access policies.
+
+#### Permissions
+
+- Manage IAM roles and policies.
+- Review authentication and authorization logs.
+- Manage security configurations.
+- Review security alerts and audit information.
+
+#### Restrictions
+
+The Security Administrator should not receive unnecessary
+permissions to modify application data or scheduling results.
+
+## Least-Privilege Principle
+
+The three roles follow the principle of least privilege. A user
+should receive only the permissions necessary to perform their
+assigned responsibilities.
+
+This reduces the impact of compromised accounts and limits
+unauthorized access to Smart City resources.
+
+---
+
+# Data Protection
+
+The Smart City system must protect data in three states:
+
+1. Data at Rest
+2. Data in Transit
+3. Data in Use
+
+## 1. Data at Rest
+
+### Example
+
+Zone-controller job information and sensor logs stored in cloud
+storage.
+
+### Protection
+
+Use encryption at rest with AWS KMS-managed encryption keys.
+
+### Explanation
+
+Stored job information, sensor records, and logs should be
+encrypted so that an attacker who gains access to the underlying
+storage cannot directly read the protected data.
+
+Access to encryption keys should be restricted through IAM
+permissions.
+
+---
+
+## 2. Data in Transit
+
+### Example
+
+A public-safety alert being sent from a Zone Controller to the
+Cloud API and then to the Smart City Dashboard.
+
+### Protection
+
+Use HTTPS with TLS encryption.
+
+### Explanation
+
+TLS protects the data while it travels between the Zone
+Controller, Cloud API, and Dashboard. This helps prevent
+eavesdropping and unauthorized modification during transmission.
+
+---
+
+## 3. Data in Use
+
+### Example
+
+The Banker's Algorithm processing resource-allocation data in
+memory.
+
+### Protection
+
+Run sensitive processing inside an isolated application process
+or container and restrict access to its memory and runtime
+environment.
+
+### Explanation
+
+Data in use exists in memory while the application is processing
+it. Access to the process should be restricted using operating
+system permissions, container isolation, and least-privilege
+service identities.
+
+## Data Protection Summary
+
+| Data State | Smart City Example | Protection |
+|------------|--------------------|------------|
+| Data at Rest | Stored jobs and sensor logs | Encryption at rest + AWS KMS |
+| Data in Transit | Public-safety alert | HTTPS + TLS |
+| Data in Use | Banker's Algorithm processing | Process/container isolation + least privilege |
